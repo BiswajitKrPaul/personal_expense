@@ -33,7 +33,6 @@ class Chart extends StatelessWidget {
     return Card(
       elevation: 6,
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: groupedTransaction.map((data) {
           return Flexible(
             fit: FlexFit.tight,
