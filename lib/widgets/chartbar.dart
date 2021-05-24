@@ -4,6 +4,7 @@ class ChartBar extends StatelessWidget {
   final String label;
   final double amount;
   final double percentage;
+
   ChartBar(this.label, this.amount, this.percentage);
 
   @override
@@ -37,12 +38,15 @@ class ChartBar extends StatelessWidget {
                     ),
                   ),
                 ),
-                FractionallySizedBox(
-                  heightFactor: percentage,
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: Theme.of(context).primaryColor,
-                      borderRadius: BorderRadius.circular(10),
+                Align(
+                  alignment: Alignment.bottomCenter,
+                  child: FractionallySizedBox(
+                    heightFactor: percentage,
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: Theme.of(context).primaryColor,
+                        borderRadius: BorderRadius.circular(10),
+                      ),
                     ),
                   ),
                 ),

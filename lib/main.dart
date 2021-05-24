@@ -65,14 +65,13 @@ class _MyAppState extends State<MyHomePage> {
 
   void _startAddNewTransaction(BuildContext ctx) {
     showModalBottomSheet(
-      shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.vertical(top: Radius.circular(25.0))),
-      isScrollControlled: true,
       context: ctx,
+      isScrollControlled: true,
       builder: (_) {
         return GestureDetector(
           child: NewExpense(_addTransaction),
           behavior: HitTestBehavior.opaque,
+          onTap: () {},
         );
       },
     );
@@ -83,7 +82,7 @@ class _MyAppState extends State<MyHomePage> {
     final mediaQuery = MediaQuery.of(context);
     final isLandscape = mediaQuery.orientation == Orientation.landscape;
     final appBar = AppBar(
-      title: Text(
+      title: const Text(
         'Personal Expense',
       ),
       actions: [
@@ -105,6 +104,7 @@ class _MyAppState extends State<MyHomePage> {
       ),
     );
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: appBar,
       body: Column(
         children: [
@@ -112,7 +112,7 @@ class _MyAppState extends State<MyHomePage> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text('Show Chart'),
+                const Text('Show Chart'),
                 Switch(
                   value: _showChart,
                   onChanged: (val) {
@@ -131,7 +131,14 @@ class _MyAppState extends State<MyHomePage> {
                   0.3,
               child: Chart(_recentTransaction),
             ),
-          if (!isLandscape) expenseList,
+          if (!isLandscape)
+            _transactions.length == 0
+                ? Center(
+                    child: const Text(
+                      'No Transactions',
+                    ),
+                  )
+                : expenseList,
           if (isLandscape)
             _showChart
                 ? Container(
@@ -143,7 +150,7 @@ class _MyAppState extends State<MyHomePage> {
                   )
                 : _transactions.length == 0
                     ? Center(
-                        child: Text('No Transactions'),
+                        child: const Text('No Transactions'),
                       )
                     : expenseList,
         ],
